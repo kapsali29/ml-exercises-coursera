@@ -24,6 +24,17 @@ def sigmoid(theta, x):
     return sig
 
 
+def apply_hypothesis(term):
+    """
+    Using that function we apply sigmoid to theta*x
+    :param term:
+    :return:
+    """
+    calc_exp = np.exp(term * (-1))
+    sig = 1 / (1 + calc_exp)
+    return sig
+
+
 def stochastic_gradient_descent(l_rate, x, labels, num_iters):
     """
     The following function implements the stochastic gradient descent algorithm
@@ -37,3 +48,10 @@ def stochastic_gradient_descent(l_rate, x, labels, num_iters):
     m, n = x.shape
     theta = np.zeros(n + 1)
     x_inc = np.column_stack((np.ones(m), x))
+    term = x_inc.dot(theta)
+    sigmoided = apply_hypothesis(term) - labels
+
+
+x, labels = read_data()
+stochastic_gradient_descent(0, x, labels, 0)
+
