@@ -48,10 +48,47 @@ def stochastic_gradient_descent(l_rate, x, labels, num_iters):
     m, n = x.shape
     theta = np.zeros(n + 1)
     x_inc = np.column_stack((np.ones(m), x))
-    term = x_inc.dot(theta)
-    sigmoided = apply_hypothesis(term) - labels
+    for i in range(num_iters):
+        for i in range(n + 1):
+            term = x_inc.dot(theta)
+            sigmoided = apply_hypothesis(term) - labels
+            theta[i] = theta[i] - l_rate * (np.dot(sigmoided, x_inc[:, i]))
+    return theta
+
+
+def read_test_data():
+    """
+    Using that function you are able to read test data
+    :return:
+    """
+    data = np.loadtxt("exercise2/data.txt", delimiter=',')
+    x1, x2, test_labels = data[:, 0], data[:, 1], data[:, 2]
+    test_x = np.column_stack((x1, x2))
+    return test_x, test_labels
+
+
+def predict(test_x, test_labels, theta):
+    """
+    Using that function we are able to make our predictions.
+
+    :param test_x: x test data
+    :param test_labels: test labels
+    :param theta: theta vector
+    :return:
+    """
+    mtest, ntest = test_x.shape
+    x_test_inc = np.column_stack((np.ones(mtest), test_x))
+    predicted = []
+    for i in range(mtest):
+        prob = sigmoid(theta=theta, x=x_test_inc[i, :])
+        if prob >= 0.5:
+            predicted.append(1)
+        else:
+            predicted.append(0)
+    return np.mean(np.array(predicted) == test_labels)
 
 
 x, labels = read_data()
-stochastic_gradient_descent(0, x, labels, 0)
-
+test_x, test_labels = read_test_data()
+theta = stochastic_gradient_descent(0.0001, x, labels, 55000)
+print(predict(test_x, test_labels, theta))
