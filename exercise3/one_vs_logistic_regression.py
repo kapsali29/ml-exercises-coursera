@@ -66,7 +66,6 @@ def one_vs_all_gradient_descent(train_data, train_labels, num_iters, a, l2):
     """
     m, n = train_data.shape
     unique_classes = [int(n) for n in np.unique(train_labels)]
-    print(unique_classes)
     theta = np.zeros((len(unique_classes), n + 1))
     train_data_inc = np.column_stack((np.ones(m), train_data))
     for i in unique_classes:
@@ -100,16 +99,21 @@ def one_vs_all_predict(classifiers, x_test, y_test):
     x_test_inc = np.column_stack((np.ones(mtest), x_test))
     for i in range(x_test_inc.shape[0]):
         x_current = x_test_inc[i, :]
-
+        max = 0
+        pos = 0
         for j in range(classifiers.shape[0]):
             theta = classifiers[j, :]
             goes = sigmoid(theta, x_current)
-            tmp_list.append(goes)
-        classified.append(max(tmp_list))
-    return np.mean(np.array(classified) == y_test)
+            cc.append(goes)
+            if goes >= max:
+                max = goes
+                pos = j + 1
+        classified.append(pos)
+    print(classified)
+    return (np.mean(np.array(classified) == y_test)) * 100
 
 
 x_data, y_labels = read_data()
 x_train, y_train, x_test, y_test = split_data(x_data, y_labels)
-classifiers = one_vs_all_gradient_descent(x_train, y_train, 1000, 0.001, 1)
+classifiers = one_vs_all_gradient_descent(x_train, y_train, 1000, 0.1, 10)
 print(one_vs_all_predict(classifiers, x_test, y_test))
