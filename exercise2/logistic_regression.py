@@ -88,7 +88,11 @@ def predict(test_x, test_labels, theta):
     return np.mean(np.array(predicted) == test_labels)
 
 
-x, labels = read_data()
-test_x, test_labels = read_test_data()
-theta = stochastic_gradient_descent(0.0001, x, labels, 55000)
-print(predict(test_x, test_labels, theta))
+if __name__ == "__main__":
+    print("Load train data")
+    x, labels = read_data()
+    print("Load test data")
+    test_x, test_labels = read_test_data()
+    print("Apply stochastic gradient descent algorithm")
+    theta = stochastic_gradient_descent(0.0001, x, labels, 55000)
+    print("Prediction accuraccy {}".format(predict(test_x, test_labels, theta)))
