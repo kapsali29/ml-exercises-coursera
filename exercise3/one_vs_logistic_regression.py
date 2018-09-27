@@ -8,9 +8,24 @@ def read_data():
     :return:
     """
     mat_data = scipy.io.loadmat('Data/ex3data1.mat')
-    train_data = mat_data['X']
-    train_labels = mat_data['y'][:, 0]
-    return train_data, train_labels
+    x_data = mat_data['X']
+    y_labels = mat_data['y'][:, 0]
+    return x_data, y_labels
+
+
+def split_data(x_data, y_labels):
+    """
+    The following function split the data to train and test randomly
+    :param x_data: train dataset
+    :param y_labels: train labels
+    :return:
+    """
+    s = np.arange(x_data.shape[0])
+    x_train = x_data[s][0:4500, :]
+    y_train = y_labels[s][0:4500]
+    x_test = x_data[s][4500:, :]
+    y_test = y_labels[s][4500:]
+    return x_train, y_train, x_test, y_test
 
 
 def apply_hypothesis(term):
@@ -56,5 +71,9 @@ def one_vs_all_gradient_descent(train_data, train_labels, num_iters, a, l2):
     return theta
 
 
-train_data, train_labels = read_data()
-print(one_vs_all_gradient_descent(train_data, train_labels, 100, 0.0001, 1).shape)
+# def one_vs_all_predict()
+
+
+x_data, y_labels = read_data()
+x_train, y_train, x_test, y_test = split_data(x_data, y_labels)
+thetas = one_vs_all_gradient_descent(x_train, y_train, 100, 0.001, 1)
