@@ -20,11 +20,14 @@ def split_data(x_data, y_labels):
     :param y_labels: train labels
     :return:
     """
-    s = np.arange(x_data.shape[0])
-    x_train = x_data[s][0:4500, :]
-    y_train = y_labels[s][0:4500]
-    x_test = x_data[s][4500:, :]
-    y_test = y_labels[s][4500:]
+    total_data = np.column_stack((x_data, y_labels))
+    shuffled_data = np.random.permutation(total_data)
+    train = shuffled_data[0:4500, :]
+    test = shuffled_data[4500:, :]
+    x_train = train[:, 0:x_data.shape[1]]
+    y_train = train[:, x_data.shape[1]].astype(int)
+    x_test = test[:, 0:x_data.shape[1]]
+    y_test = test[:, x_data.shape[1]].astype(int)
     return x_train, y_train, x_test, y_test
 
 
@@ -35,6 +38,18 @@ def apply_hypothesis(term):
     :return:
     """
     calc_exp = np.exp(term * (-1))
+    sig = 1 / (1 + calc_exp)
+    return sig
+
+
+def sigmoid(theta, x):
+    """
+    The following function calculates the sigmoid function
+    :param theta: theta vector parameters
+    :param x: input values
+    :return:
+    """
+    calc_exp = np.exp(np.dot(theta, x) * (-1))
     sig = 1 / (1 + calc_exp)
     return sig
 
@@ -50,7 +65,8 @@ def one_vs_all_gradient_descent(train_data, train_labels, num_iters, a, l2):
     :return: theta parameters
     """
     m, n = train_data.shape
-    unique_classes = np.unique(train_labels)
+    unique_classes = [int(n) for n in np.unique(train_labels)]
+    print(unique_classes)
     theta = np.zeros((len(unique_classes), n + 1))
     train_data_inc = np.column_stack((np.ones(m), train_data))
     for i in unique_classes:
@@ -71,9 +87,29 @@ def one_vs_all_gradient_descent(train_data, train_labels, num_iters, a, l2):
     return theta
 
 
-# def one_vs_all_predict()
+def one_vs_all_predict(classifiers, x_test, y_test):
+    """
+
+    :param classifiers: theta parameters for each category
+    :param x_test: test data
+    :param y_test: test labels
+    :return:
+    """
+    classified = []
+    mtest, ntest = x_test.shape
+    x_test_inc = np.column_stack((np.ones(mtest), x_test))
+    for i in range(x_test_inc.shape[0]):
+        x_current = x_test_inc[i, :]
+
+        for j in range(classifiers.shape[0]):
+            theta = classifiers[j, :]
+            goes = sigmoid(theta, x_current)
+            tmp_list.append(goes)
+        classified.append(max(tmp_list))
+    return np.mean(np.array(classified) == y_test)
 
 
 x_data, y_labels = read_data()
 x_train, y_train, x_test, y_test = split_data(x_data, y_labels)
-thetas = one_vs_all_gradient_descent(x_train, y_train, 100, 0.001, 1)
+classifiers = one_vs_all_gradient_descent(x_train, y_train, 1000, 0.001, 1)
+print(one_vs_all_predict(classifiers, x_test, y_test))
