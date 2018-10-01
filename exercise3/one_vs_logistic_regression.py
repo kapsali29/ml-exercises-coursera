@@ -118,14 +118,14 @@ def one_vs_all_predict(classifiers, x_test, y_test):
     x_test_inc = mean_normalize(x_test_inc)
     for i in range(x_test_inc.shape[0]):
         x_current = x_test_inc[i, :]
-        max = 0
+        min = 0
         pos = 0
         for j in range(classifiers.shape[0]):
-            y = (y_test == j + 1).astype(int)
+            y = np.array([j + 1])
             theta = classifiers[j, :]
             ans = cost(theta, x_current, y)
-            if ans >= max:
-                max = ans
+            if min >= ans:
+                min = ans
                 pos = j + 1
         classified.append(pos)
     return (np.mean(np.array(classified) == y_test)) * 100
