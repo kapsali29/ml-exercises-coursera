@@ -1,3 +1,5 @@
+from collections import Counter
+
 import scipy.io
 import numpy as np
 
@@ -7,9 +9,9 @@ def read_data():
     Using that function
     :return:
     """
-    mat_data = scipy.io.loadmat('Data/ex3data1.mat')
+    mat_data = scipy.io.loadmat('exercise3/Data/ex3data1.mat')
     x_data = mat_data['X']
-    y_labels = mat_data['y'][:, 0]
+    y_labels = mat_data['y'][:, 0].ravel()
     return x_data, y_labels
 
 
@@ -20,14 +22,11 @@ def split_data(x_data, y_labels):
     :param y_labels: train labels
     :return:
     """
-    total_data = np.column_stack((x_data, y_labels))
-    shuffled_data = np.random.permutation(total_data)
-    train = shuffled_data[0:4500, :]
-    test = shuffled_data[4500:, :]
-    x_train = train[:, 0:x_data.shape[1]]
-    y_train = train[:, x_data.shape[1]].astype(int)
-    x_test = test[:, 0:x_data.shape[1]]
-    y_test = test[:, x_data.shape[1]].astype(int)
+    indices = np.random.permutation(x_data.shape[0])
+    training_idx, test_idx = indices[:4750], indices[4750:]
+    x_train, x_test = x_data[training_idx, :], x_data[test_idx, :]
+    y_train = y_labels[training_idx]
+    y_test = y_labels[test_idx]
     return x_train, y_train, x_test, y_test
 
 
@@ -54,6 +53,13 @@ def sigmoid(theta, x):
     return sig
 
 
+def mean_normalize(X):
+    '''apply mean normalization to each column of the matrix X'''
+    X[X == 0.] = 1e-6
+    X_max = X.max(axis=0)
+    return X - X_max
+
+
 def one_vs_all_gradient_descent(train_data, train_labels, num_iters, a, l2):
     """
     Using that function the one_vs_all gradient descent algorithm is computed
@@ -68,22 +74,34 @@ def one_vs_all_gradient_descent(train_data, train_labels, num_iters, a, l2):
     unique_classes = [int(n) for n in np.unique(train_labels)]
     theta = np.zeros((len(unique_classes), n + 1))
     train_data_inc = np.column_stack((np.ones(m), train_data))
+    train_data_inc = mean_normalize(train_data_inc)
     for i in unique_classes:
         print("Train classifier for {} class".format(i))
-        labels_cp = train_labels
-        labels_cp[labels_cp == i] = 1
-        labels_cp[labels_cp != i] = 0
+        labels_cp = (train_labels == i).astype(int)
 
         theta_current = theta[i - 1, :]
         for n in range(num_iters):
             term = np.dot(train_data_inc, theta_current)
             sigmoided = apply_hypothesis(term) - labels_cp
-            new_theta = (-a / m) * np.dot(sigmoided, train_data_inc)
-
+            new_theta = (-1) * (a / m) * np.dot(sigmoided, train_data_inc)
             theta_current[0] = theta_current[0] + new_theta[0]
             theta_current[1:] = theta_current[1:] + new_theta[1:] - (l2 / m) * theta_current[1:]
         theta[i - 1, :] = theta_current
     return theta
+
+
+def cost(theta, X, y):
+    """
+    The following function computes the cost for each classifier
+    :param theta: current theta
+    :param X: x input
+    :param y: y label
+    :return:
+    """
+    predictions = sigmoid(X, theta)
+    # predictions[predictions == 1.0] = 0.999  # log(1)=0 causes error in division
+    error = -y * np.log(predictions) - (1 - y) * np.log(1 - predictions)
+    return sum(error) / len(y)
 
 
 def one_vs_all_predict(classifiers, x_test, y_test):
@@ -97,23 +115,23 @@ def one_vs_all_predict(classifiers, x_test, y_test):
     classified = []
     mtest, ntest = x_test.shape
     x_test_inc = np.column_stack((np.ones(mtest), x_test))
+    x_test_inc = mean_normalize(x_test_inc)
     for i in range(x_test_inc.shape[0]):
         x_current = x_test_inc[i, :]
         max = 0
         pos = 0
         for j in range(classifiers.shape[0]):
+            y = (y_test == j + 1).astype(int)
             theta = classifiers[j, :]
-            goes = sigmoid(theta, x_current)
-            cc.append(goes)
-            if goes >= max:
-                max = goes
+            ans = cost(theta, x_current, y)
+            if ans >= max:
+                max = ans
                 pos = j + 1
         classified.append(pos)
-    print(classified)
     return (np.mean(np.array(classified) == y_test)) * 100
 
 
 x_data, y_labels = read_data()
 x_train, y_train, x_test, y_test = split_data(x_data, y_labels)
-classifiers = one_vs_all_gradient_descent(x_train, y_train, 1000, 0.1, 10)
+classifiers = one_vs_all_gradient_descent(x_train, y_train, 1000, 0.1, 0.1)
 print(one_vs_all_predict(classifiers, x_test, y_test))
