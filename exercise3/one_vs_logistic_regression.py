@@ -131,7 +131,8 @@ def one_vs_all_predict(classifiers, x_test, y_test):
     return (np.mean(np.array(classified) == y_test)) * 100
 
 
-x_data, y_labels = read_data()
-x_train, y_train, x_test, y_test = split_data(x_data, y_labels)
-classifiers = one_vs_all_gradient_descent(x_train, y_train, 1000, 0.1, 0.1)
-print(one_vs_all_predict(classifiers, x_test, y_test))
+if __name__ == "__main__":
+    x_data, y_labels = read_data()
+    x_train, y_train, x_test, y_test = split_data(x_data, y_labels)
+    classifiers = one_vs_all_gradient_descent(x_train, y_train, 1000, 0.1, 0.1)
+    print(one_vs_all_predict(classifiers, x_test, y_test))
