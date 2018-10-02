@@ -13,3 +13,7 @@ to find the optimal theta parameters
 A multinomial regularized logistic Regression implemented from scratch. The data that i used was the MNIST
 dataset to predict handwritten digits. To train the model the One vs All gradient descent
 algorithm used.
+
+## Exercise 4: Support Vector Machines
+For this exercise i had to develop gaussian kernels that measures the similarity between
+2 vectors (observation x and landmark l) and to develop a spam ham classifier
