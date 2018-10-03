@@ -125,6 +125,23 @@ def kMeansInitCentroids(X, K):
     return centroids
 
 
+def runkMeans(X, centroids, max_iters=10):
+    """
+    Runs the K-means algorithm.
+    """
+    K = centroids.shape[0]
+    idx = None
+    idx_history = []
+    centroid_history = []
+
+    for i in range(max_iters):
+        idx = findClosestCentroids(X, centroids)
+        idx_history.append(idx)
+        centroid_history.append(centroids)
+        centroids = computeCentroids(X, idx, K)
+    return centroids, idx
+
+
 if __name__ == "__main__":
     print("Load ex7data2.mat dataset")
     X = load_data()
