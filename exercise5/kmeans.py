@@ -59,9 +59,50 @@ def findClosestCentroids(X, centroids):
     return idx
 
 
+def computeCentroids(X, idx, K):
+    """
+    Returns the new centroids by computing the means of the data points
+    assigned to each centroid.
+
+    Parameters
+    ----------
+    X : array_like
+        The datset where each row is a single data point. That is, it
+        is a matrix of size (m, n) where there are m datapoints each
+        having n dimensions.
+
+    idx : array_like
+        A vector (size m) of centroid assignments (i.e. each entry in range [0 ... K-1])
+        for each example.
+
+    K : int
+        Number of clusters
+
+    Returns
+    -------
+    centroids : array_like
+        A matrix of size (K, n) where each row is the mean of the data
+        points assigned to it.
+
+    """
+    # Useful variables
+    m, n = X.shape
+    # You need to return the following variables correctly.
+    centroids = np.zeros((K, n))
+    for i in range(K):
+        ix_current = np.isin(idx, i)
+        indices = np.where(ix_current)
+        centroids[i] = sum(X[indices]) / len(X[indices])
+    return centroids
+
+
 if __name__ == "__main__":
     print("Load ex7data2.mat dataset")
     X = load_data()
+    K = 3
     initial_centroids = np.array([[3, 3], [6, 2], [8, 5]])
+    print("Compute the centroid memberships for every example")
     idx = findClosestCentroids(X, initial_centroids)
-    print(idx[:3])
+    print("Compute new centroids")
+    centroids = computeCentroids(X, idx, K)
+    print(centroids)
