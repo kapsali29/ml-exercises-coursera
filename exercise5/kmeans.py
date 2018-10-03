@@ -96,6 +96,35 @@ def computeCentroids(X, idx, K):
     return centroids
 
 
+def kMeansInitCentroids(X, K):
+    """
+    This function initializes K centroids that are to be used in K-means on the dataset x.
+
+    Parameters
+    ----------
+    X : array_like
+        The dataset of size (m x n).
+
+    K : int
+        The number of clusters.
+
+    Returns
+    -------
+    centroids : array_like
+        Centroids of the clusters. This is a matrix of size (K x n).
+
+    Instructions
+    ------------
+    You should set centroids to randomly chosen examples from the dataset X.
+    """
+    m, n = X.shape
+
+    # You should return this values correctly
+    randidx = np.random.permutation(X.shape[0])
+    centroids = X[randidx[:K], :]
+    return centroids
+
+
 if __name__ == "__main__":
     print("Load ex7data2.mat dataset")
     X = load_data()
