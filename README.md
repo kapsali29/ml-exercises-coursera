@@ -17,3 +17,12 @@ algorithm used.
 ## Exercise 4: Support Vector Machines
 For this exercise i had to develop gaussian kernels that measures the similarity between
 2 vectors (observation x and landmark l) and to develop a spam ham classifier
+
+## Exercise 5: kmeans and Pca
+
+For this exercise i had to develop the kmeans and pca algorithm from scratch. These 
+algorithms are classified as un supervised machine learning algorithms.
+
+Kmeans: Creates clusters from points that are close to specific points
+
+PCA: Is an algorithm that used for dimensionality reduction

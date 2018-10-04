@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2a035642-638b-4a93-9b4a-d0d942ea807b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/pip-selfcheck.json" beforeDir="false" afterPath="$PROJECT_DIR$/venv/pip-selfcheck.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,18 +19,18 @@
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="4" />
           <entry key="project.open.time.11" value="1" />
-          <entry key="project.open.time.13" value="2" />
+          <entry key="project.open.time.13" value="3" />
           <entry key="project.open.time.18" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.9" value="2" />
-          <entry key="project.opened" value="13" />
+          <entry key="project.opened" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="mat" value="3" />
-          <entry key="md" value="2" />
+          <entry key="md" value="3" />
           <entry key="py" value="15" />
           <entry key="txt" value="25" />
         </counts>
@@ -38,23 +38,23 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSV" value="3" />
-          <entry key="Markdown" value="2" />
+          <entry key="Markdown" value="3" />
           <entry key="PLAIN_TEXT" value="25" />
           <entry key="Python" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="md" value="799" />
-          <entry key="py" value="9171" />
+          <entry key="md" value="1145" />
+          <entry key="py" value="10309" />
           <entry key="txt" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Markdown" value="799" />
+          <entry key="Markdown" value="1145" />
           <entry key="PLAIN_TEXT" value="11" />
-          <entry key="Python" value="9171" />
+          <entry key="Python" value="10309" />
         </counts>
       </usages-collector>
     </session>
@@ -79,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/exercise5/kmeans.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" selection-start-line="6" selection-end-line="14" selection-end-column="20" />
+            <state relative-caret-position="357">
+              <caret line="144" selection-start-line="144" selection-end-line="144" selection-end-column="26" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <marker date="1538560885353" expanded="true" signature="92:325" ph="..." />
@@ -89,16 +89,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/exercise5/pca.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
+            <state relative-caret-position="135">
+              <caret line="18" column="73" selection-start-line="18" selection-start-column="73" selection-end-line="18" selection-end-column="73" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <marker date="1538655647679" expanded="true" signature="337:342" ph="..." />
-                <marker date="1538655647679" expanded="true" signature="653:904" ph="..." />
+                <marker date="1538659193083" expanded="true" signature="78:80" ph="..." />
+                <marker date="1538659193083" expanded="true" signature="112:571" ph="..." />
+                <marker date="1538659193083" expanded="true" signature="1029:1038" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="225">
+                <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -138,10 +151,10 @@
         <option value="$PROJECT_DIR$/exercise3/one_vs_logistic_regression.py" />
         <option value="$PROJECT_DIR$/exercise4/kernels.py" />
         <option value="$PROJECT_DIR$/exercise4/email_classification.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/exercise5/kmeans.py" />
         <option value="$PROJECT_DIR$/exercise5/image_compression.py" />
         <option value="$PROJECT_DIR$/exercise5/pca.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -238,9 +251,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1366" y="0" width="1920" height="1080" extended-state="7" />
+    <frame x="1366" y="0" width="1920" height="1080" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29082176" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29402348" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -434,16 +447,6 @@
     <entry file="file://$PROJECT_DIR$/exercise4/Data/enron1/ham/0027.1999-12-17.farmer.ham.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="270">
-            <caret line="18" column="77" selection-start-line="18" selection-start-column="77" selection-end-line="18" selection-end-column="77" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/exercise3/one_vs_logistic_regression.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -480,8 +483,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/exercise5/kmeans.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" selection-start-line="6" selection-end-line="14" selection-end-column="20" />
+        <state relative-caret-position="357">
+          <caret line="144" selection-start-line="144" selection-end-line="144" selection-end-column="26" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <marker date="1538560885353" expanded="true" signature="92:325" ph="..." />
@@ -491,13 +494,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/exercise5/pca.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="35" column="11" selection-start-line="35" selection-start-column="11" selection-end-line="35" selection-end-column="11" />
+        <state relative-caret-position="135">
+          <caret line="18" column="73" selection-start-line="18" selection-start-column="73" selection-end-line="18" selection-end-column="73" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1538655647679" expanded="true" signature="337:342" ph="..." />
-            <marker date="1538655647679" expanded="true" signature="653:904" ph="..." />
+            <marker date="1538659193083" expanded="true" signature="78:80" ph="..." />
+            <marker date="1538659193083" expanded="true" signature="112:571" ph="..." />
+            <marker date="1538659193083" expanded="true" signature="1029:1038" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="225">
+            <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
